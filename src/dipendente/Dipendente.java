@@ -109,16 +109,5 @@ public class Dipendente {
         this.dipartimento = dipartimento;
     }
 
-    public enum Livello {
-        OPERAIO,
-        IMPIEGATO,
-        QUADRO,
-        DIRIGENTE
-    }
 
-    public enum Dipartimento {
-        PRODUZIONE,
-        AMMINISTRAZIONE,
-        VENDITE
-    }
 }
