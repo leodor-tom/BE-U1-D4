@@ -3,13 +3,13 @@ package dipendente;
 public class Dipendente {
 
     private final long stipendioBase = 1000;
+    private Livello livello;
+    private Dipartimento dipartimento;
     private int matricola;
     private double stipendio;
-    private double importoOrarioStraordinario;
-    private Livello livello;
 
     ;
-    private Dipartimento dipartimento;
+    private double importoOrarioStraordinario;
 
     public Dipendente(int matricola, Dipartimento dipartimento) {
 
@@ -44,38 +44,27 @@ public class Dipendente {
         System.out.println("Matricola dipendente: " + this.matricola + ", livello: " + this.livello + ", dipartimento: " + this.dipartimento + ", stipendio: " + this.stipendio + ", importo orario straordinario: " + this.importoOrarioStraordinario);
     }
 
-    public double stipendio(Livello livello) {
-        if (this.livello.equals(Livello.IMPIEGATO)) {
-            return this.stipendio = stipendioBase * 1.2;
-        } else if (this.livello.equals(Livello.QUADRO)) {
-            return this.stipendio = stipendioBase * 1.5;
-        } else if (this.livello.equals(Livello.DIRIGENTE)) {
-            return this.stipendio = stipendioBase * 2;
-        } else {
-            System.err.println("nessun aumento disponibile");
-            return 0;
+
+    public void promuovi() {
+        switch (this.livello) {
+
+            case OPERAIO:
+                this.livello = Livello.IMPIEGATO;
+                this.stipendio = stipendioBase * 1.2;
+                break;
+            case IMPIEGATO:
+                this.livello = Livello.QUADRO;
+                this.stipendio = stipendioBase * 1.5;
+                break;
+            case QUADRO:
+                this.livello = Livello.DIRIGENTE;
+                this.stipendio = stipendioBase * 2;
+                break;
+            default:
+                System.err.println("un dirigente non può essere promosso ad un livello superiore");
         }
     }
-
-    public double promuovi() {
-        if (this.livello.equals(Livello.OPERAIO)) {
-
-            this.livello = Livello.IMPIEGATO;
-            return stipendio(this.livello);
-        } else if (this.livello.equals(Livello.IMPIEGATO)) {
-
-            this.livello = Livello.QUADRO;
-            return stipendio(this.livello);
-        } else if (this.livello.equals(Livello.QUADRO)) {
-            this.livello = Livello.DIRIGENTE;
-            return stipendio(this.livello);
-
-        } else {
-            System.err.println("un dirigente non può essere promosso ad un livello superiore");
-            return 0;
-        }
-
-    }
+  
 
     public long getStipendioBase() {
         return stipendioBase;
